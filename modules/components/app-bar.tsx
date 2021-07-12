@@ -2,7 +2,7 @@ import { styled } from "@material-ui/core/styles"
 import MuiAppBar, {
     AppBarProps as MuiAppBarProps,
 } from "@material-ui/core/AppBar"
-import { drawerWidth } from "./theme_provider"
+import { drawerWidth } from "./theme-provider"
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean

@@ -1,6 +1,6 @@
 import { styled } from "@material-ui/core/styles"
 import MuiDrawer from "@material-ui/core/Drawer"
-import { drawerWidth } from "./theme_provider"
+import { drawerWidth } from "./theme-provider"
 
 export const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",

@@ -7,7 +7,7 @@ import MuiContainer from "@material-ui/core/Container"
 import MuiGrid from "@material-ui/core/Grid"
 import MuiPaper from "@material-ui/core/Paper"
 
-import { AppBar } from "../modules/components/app_bar"
+import { AppBar } from "../modules/components/app-bar"
 
 export default function Home() {
     const [open, setOpen] = useState(false)
