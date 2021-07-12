@@ -1,60 +1,29 @@
-import { useState } from "react"
-import Head from "next/head"
-
 import MuiToolbar from "@material-ui/core/Toolbar"
-import MuiBox from "@material-ui/core/Box"
 import MuiContainer from "@material-ui/core/Container"
 import MuiGrid from "@material-ui/core/Grid"
-import MuiPaper from "@material-ui/core/Paper"
 
-import { AppBar } from "../modules/components/app-bar"
+import { MainBox } from "@/components/box-with-appbar-height"
+import { AppBar } from "@/components/app-bar"
+import { ArticleCardForArsenalPresets } from "@/components/card-with-appbar-height"
+import { useArsenalPresets } from "@/repositories/use-arsenal-presets"
+import { repositories } from "@/repositories/index"
+import { definitions } from "@/types/supabase"
 
-export default function Home() {
-    const [open, setOpen] = useState(false)
-    const toggleDrawer = () => {
-        setOpen(!open)
-    }
-
-    const renderCollection = () =>
-        [1, 2, 3].map((k) => (
-            <MuiGrid key={k} item xs={12} sm={6} md={4} lg={3}>
-                <MuiPaper
-                    sx={{
-                        p: 2,
-                        display: "flex",
-                        flexDirection: "column",
-                        height: 360,
-                    }}
-                >
-                    Ass
-                </MuiPaper>
-            </MuiGrid>
-        ))
+export default function Home({
+    arsenalPresets,
+}: {
+    arsenalPresets: definitions["arsenal_presets"][]
+}) {
+    const { data, isError, isLoading } = useArsenalPresets({
+        initialData: arsenalPresets,
+    })
 
     return (
         <>
-            <Head>
-                <title>Waffle</title>
-            </Head>
-            <AppBar position="sticky" open={open}>
-                <MuiToolbar
-                    sx={{
-                        pr: "24px",
-                    }}
-                ></MuiToolbar>
+            <AppBar position="sticky" open={false} color="primary">
+                <MuiToolbar></MuiToolbar>
             </AppBar>
-            <MuiBox
-                component="main"
-                sx={{
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === "light"
-                            ? theme.palette.grey[100]
-                            : theme.palette.grey[900],
-                    flexGrow: 1,
-                    height: "calc(100vh - 64px)",
-                    overflow: "auto",
-                }}
-            >
+            <MainBox>
                 <MuiContainer maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                     <MuiGrid
                         container
@@ -62,10 +31,21 @@ export default function Home() {
                         alignItems="center"
                         justifyContent="center"
                     >
-                        {renderCollection()}
+                        <MuiGrid item xs>
+                            <ArticleCardForArsenalPresets
+                                objects={data!}
+                                isLoading={isLoading}
+                            />
+                        </MuiGrid>
                     </MuiGrid>
                 </MuiContainer>
-            </MuiBox>
+            </MainBox>
         </>
     )
+}
+
+export async function getStaticProps() {
+    const arsenalPresets = await repositories.arsenalPresetsRepository.get()
+
+    return { props: { arsenalPresets } }
 }

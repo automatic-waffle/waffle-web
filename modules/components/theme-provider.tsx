@@ -1,47 +1,84 @@
-import { useMediaQuery } from "@material-ui/core"
-import { ThemeProvider, createTheme } from "@material-ui/core"
-import { scrollbarStyles } from "./scrollbar"
+import { useMemo, useEffect } from "react"
+import {
+    ThemeProvider,
+    createTheme,
+    PaletteMode,
+    useMediaQuery,
+} from "@material-ui/core"
+import { useRecoilState } from "recoil"
+
+import { scrollbarStyles } from "@/components/scrollbar"
+import paletteModeState from "@/atoms/paletteModeState"
 
 export const drawerWidth: number = 240
 
 export const CustomThemeProvider: React.FC = ({ children }) => {
+    const [paletteMode, setPaletteMode] = useRecoilState(paletteModeState)
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)")
-    const preferredMode = prefersDarkMode ? "dark" : "light"
 
-    const scrollbarColors = {
-        dark: {
-            track: "#2b2b2b",
-            thumb: "#6b6b6b",
-            active: "#959595",
-        },
-        light: {
-            track: "#ffffff",
-            thumb: "#6b6b6b",
-            active: "#959595",
-        },
-    }
+    useEffect(() => {
+        if (process.browser) {
+            setPaletteMode(prefersDarkMode ? "dark" : "light")
+        }
+    }, [prefersDarkMode, setPaletteMode])
 
-    const theme = createTheme({
-        palette: {
-            primary: {
-                light: "#e91e63",
-                main: "#c2185b",
-                dark: "#880e4f",
+    const scrollbarColors = useMemo(() => {
+        const nextScrollbarColors = {
+            dark: {
+                track: "#2b2b2b",
+                thumb: "#6b6b6b",
+                active: "#959595",
             },
-            secondary: {
-                light: "#ffb74d",
-                main: "#f9b934",
-                dark: "#FF9800",
+            light: {
+                track: "#ffffff",
+                thumb: "#6b6b6b",
+                active: "#959595",
             },
-        },
-        components: {
-            MuiCssBaseline: {
-                styleOverrides: {
-                    body: scrollbarStyles(scrollbarColors[preferredMode]),
+        }
+
+        return nextScrollbarColors
+    }, [])
+
+    const theme = useMemo(() => {
+        const nextTheme = createTheme({
+            palette: {
+                mode: paletteMode as PaletteMode,
+                primary: {
+                    main: "#b71c1c",
+                },
+                secondary: {
+                    main: "#80d8ff",
                 },
             },
-        },
-    })
+            typography: {
+                fontFamily: [
+                    "Recursive",
+                    "monospace",
+                    "-apple-system",
+                    "BlinkMacSystemFont",
+                    '"Segoe UI"',
+                    "Roboto",
+                    '"Helvetica Neue"',
+                    "Arial",
+                    "sans-serif",
+                    '"Apple Color Emoji"',
+                    '"Segoe UI Emoji"',
+                    '"Segoe UI Symbol"',
+                ].join(","),
+            },
+            components: {
+                MuiCssBaseline: {
+                    styleOverrides: {
+                        body: scrollbarStyles(
+                            scrollbarColors[paletteMode as PaletteMode],
+                        ),
+                    },
+                },
+            },
+        })
+
+        return nextTheme
+    }, [paletteMode, scrollbarColors])
 
     return <ThemeProvider theme={theme}>{children}</ThemeProvider>
 }
