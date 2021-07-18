@@ -5,22 +5,21 @@ import {
     PaletteMode,
     useMediaQuery,
 } from "@material-ui/core"
-import { useRecoilState } from "recoil"
-
+import { useStore } from "nanostores/react"
 import { scrollbarStyles } from "@/components/scrollbar"
-import paletteModeState from "@/atoms/paletteModeState"
+import { palette, changePaletteMode } from "modules/nanostore/palette"
 
 export const drawerWidth: number = 240
 
 export const CustomThemeProvider: React.FC = ({ children }) => {
-    const [paletteMode, setPaletteMode] = useRecoilState(paletteModeState)
+    const { mode } = useStore(palette)
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)")
 
     useEffect(() => {
         if (process.browser) {
-            setPaletteMode(prefersDarkMode ? "dark" : "light")
+            changePaletteMode(prefersDarkMode ? "dark" : "light")
         }
-    }, [prefersDarkMode, setPaletteMode])
+    }, [mode, prefersDarkMode])
 
     const scrollbarColors = useMemo(() => {
         const nextScrollbarColors = {
@@ -42,7 +41,7 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
     const theme = useMemo(() => {
         const nextTheme = createTheme({
             palette: {
-                mode: paletteMode as PaletteMode,
+                mode: mode as PaletteMode,
                 primary: {
                     main: "#b71c1c",
                 },
@@ -70,7 +69,7 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
                 MuiCssBaseline: {
                     styleOverrides: {
                         body: scrollbarStyles(
-                            scrollbarColors[paletteMode as PaletteMode],
+                            scrollbarColors[mode as PaletteMode],
                         ),
                     },
                 },
@@ -78,7 +77,7 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
         })
 
         return nextTheme
-    }, [paletteMode, scrollbarColors])
+    }, [mode, scrollbarColors])
 
     return <ThemeProvider theme={theme}>{children}</ThemeProvider>
 }

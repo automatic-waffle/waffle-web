@@ -2,7 +2,10 @@ import { styled } from "@material-ui/core/styles"
 import MuiAppBar, {
     AppBarProps as MuiAppBarProps,
 } from "@material-ui/core/AppBar"
-
+import MuiToolbar from "@material-ui/core/Toolbar"
+import MuiButton from "@material-ui/core/Button"
+import MuiTypography from "@material-ui/core/Typography"
+import { useSession } from "next-auth/client"
 import { drawerWidth } from "@/components/theme-provider"
 
 interface AppBarProps extends MuiAppBarProps {
@@ -27,3 +30,22 @@ export const AppBar = styled(MuiAppBar, {
         }),
     }),
 }))
+
+export const AppBarWithSession: React.FC = () => {
+    const [session, loading] = useSession()
+
+    return (
+        <AppBar position="sticky" open={false} color="primary">
+            <MuiToolbar>
+                <MuiTypography
+                    variant="h6"
+                    component="div"
+                    sx={{ flexGrow: 1 }}
+                >
+                    News
+                </MuiTypography>
+                <MuiButton color="inherit">Login</MuiButton>
+            </MuiToolbar>
+        </AppBar>
+    )
+}

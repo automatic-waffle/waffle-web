@@ -14,8 +14,8 @@ import MuiSkeleton from "@material-ui/core/Skeleton"
 import MuiBox from "@material-ui/core/Box"
 
 import { definitions } from "@/types/supabase"
-import { PropsWithChildren } from "react"
-import { Typography } from "@material-ui/core"
+import { useArsenalPresets } from "@/repositories/use-arsenal-presets"
+import { useTranslation } from "react-i18next"
 
 export const CardWithAppbarHeight = styled(MuiCard)(({ theme }) => ({
     ...overrideExistingStyle(
@@ -46,14 +46,22 @@ export const ArticleCardWithHeader: React.FC<{ title: string }> = ({
     </ArticleCard>
 )
 
-export const ArticleCardWithContentList: React.FC<{ title: string }> = ({
-    title,
-    children,
-}) => (
+export const ArticleCardWithContentList: React.FC<{
+    title: string
+    isLoading: boolean
+}> = ({ title, children, isLoading }) => (
     <ArticleCardWithHeader title={title}>
-        <MuiCardContent>
-            <MuiList>{children}</MuiList>
-        </MuiCardContent>
+        {isLoading ? (
+            <MuiSkeleton
+                sx={{ height: 200 }}
+                animation="wave"
+                variant="rectangular"
+            />
+        ) : (
+            <MuiCardContent>
+                <MuiList>{children}</MuiList>
+            </MuiCardContent>
+        )}
     </ArticleCardWithHeader>
 )
 
@@ -89,36 +97,30 @@ export const ListItemLink: React.FC<{
 )
 
 interface Props<ObjectType> {
-    objects: ObjectType[]
-    properties?: {
-        key: keyof ObjectType
-    }[]
-    isLoading: boolean
+    initialData: ObjectType[]
 }
 
 export function ArticleCardForArsenalPresets<
     ObjectType extends definitions["arsenal_presets"],
->({ objects, isLoading }: PropsWithChildren<Props<ObjectType>>) {
+>({ initialData }: Props<ObjectType>) {
+    const { t } = useTranslation()
+    const { data, isError, isLoading } = useArsenalPresets({
+        initialData,
+    })
+
     return (
-        <ArticleCardWithContentList title="Arsenal Presets">
-            {isLoading ? (
-                <MuiSkeleton
-                    sx={{ height: 200 }}
-                    animation="wave"
-                    variant="rectangular"
+        <ArticleCardWithContentList
+            title={t("presets.arsenal")}
+            isLoading={isLoading}
+        >
+            {data!.map((object) => (
+                <ListItemLink
+                    key={object.name}
+                    title={object.name}
+                    subTitle={new Date(object.date_created!).toLocaleString()}
+                    href={`/presets/arsenal/${object.name}`}
                 />
-            ) : (
-                objects.map((object) => (
-                    <ListItemLink
-                        key={object.name}
-                        title={object.name}
-                        subTitle={new Date(
-                            object.date_created!,
-                        ).toLocaleString()}
-                        href={`/presets/arsenal/${object.name}`}
-                    ></ListItemLink>
-                ))
-            )}
+            ))}
         </ArticleCardWithContentList>
     )
 }

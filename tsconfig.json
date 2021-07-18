@@ -16,9 +16,10 @@
         "types": ["node"],
         "baseUrl": ".",
         "paths": {
-            "@/components/*": ["modules/components/*"],
+            "@/translations/*": ["modules/translations/*"],
             "@/repositories/*": ["modules/repositories/*"],
-            "@/atoms/*": ["modules/atoms/*"],
+            "@/components/*": ["modules/components/*"],
+            "@/nanostore/*": ["modules/nanostore/*"],
             "@/utils/*": ["modules/utils/*"],
             "@/types/*": ["types/*"]
         }
