@@ -16,12 +16,12 @@
         "types": ["node"],
         "baseUrl": ".",
         "paths": {
-            "@/translations/*": ["./translations/*"],
-            "@/repositories/*": ["./repositories/*"],
-            "@/components/*": ["./components/*"],
-            "@/nanostore/*": ["./nanostore/*"],
-            "@/utils/*": ["./utils/*"],
-            "@/types/*": ["./types/*"]
+            "@/translations/*": ["src/translations/*"],
+            "@/repositories/*": ["src/repositories/*"],
+            "@/components/*": ["src/components/*"],
+            "@/nanostore/*": ["src/nanostore/*"],
+            "@/utils/*": ["src/utils/*"],
+            "@/types/*": ["src/types/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
