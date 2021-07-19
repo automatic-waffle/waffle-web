@@ -7,7 +7,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "update-types": "npx openapi-typescript https://tgkpplwyiqynshkfmcet.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyNDI3NzY4MSwiZXhwIjoxOTM5ODUzNjgxfQ.m-RrLzFfBxDagttHNoPPbSmSzbUb-ugpEdZnxal-mi4 --output types/supabase.ts"
+        "update-types": "npx openapi-typescript https://tgkpplwyiqynshkfmcet.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyNDI3NzY4MSwiZXhwIjoxOTM5ODUzNjgxfQ.m-RrLzFfBxDagttHNoPPbSmSzbUb-ugpEdZnxal-mi4 --output src/supabase.ts"
     },
     "dependencies": {
         "@emotion/react": "^11.4.0",
