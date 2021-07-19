@@ -6,6 +6,7 @@ const resources = {
         translation: {
             title: "Waffle",
             "presets.arsenal": "Arsenal Presets",
+            "signin.discord": "Sign In Discord",
         },
     },
 }

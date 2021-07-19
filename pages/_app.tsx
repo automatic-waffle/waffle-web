@@ -6,18 +6,35 @@ import Page404 from "./404"
 import Page403 from "./403"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { CustomThemeProvider } from "@/components/theme-provider"
-import { badge, badgeEn, log } from "@logux/client"
+import { badge, badgeEn, ClientMeta, CrossTabClient, log } from "@logux/client"
 import { badgeStyles } from "@logux/client/badge/styles"
 import "@/translations/i18n"
 import { useTranslation } from "react-i18next"
-import { useCreateLoguxAuthClient } from "@/utils/createLoguxAuthClient"
+import { useEffect, useState } from "react"
+import { Log, LogStore } from "@logux/core"
 
 function MyApp({ Component, pageProps }: AppProps) {
     const { t } = useTranslation()
-    const loguxAuthClient = useCreateLoguxAuthClient()
+    const [client, setClient] = useState<CrossTabClient<
+        {},
+        Log<ClientMeta, LogStore>
+    > | null>(null)
 
-    badge(loguxAuthClient, { messages: badgeEn, styles: badgeStyles })
-    log(loguxAuthClient)
+    useEffect(() => {
+        if (process.browser) {
+            const client = new CrossTabClient({
+                subprotocol: "1.0.0",
+                server: process.env.LOGUX_API_URL!,
+                userId: pageProps.session?.user?.name! || "anonymous",
+                token: (pageProps.session?.accessToken as string) || "",
+            })
+
+            badge(client, { messages: badgeEn, styles: badgeStyles })
+            log(client)
+
+            setClient(client as CrossTabClient)
+        }
+    }, [pageProps, setClient])
 
     return (
         <>
@@ -32,7 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </Head>
             <CustomThemeProvider>
                 <Provider session={pageProps.session}>
-                    <ClientContext.Provider value={loguxAuthClient}>
+                    <ClientContext.Provider value={client!}>
                         <ChannelErrors
                             NotFound={Page404}
                             AccessDenied={Page403}

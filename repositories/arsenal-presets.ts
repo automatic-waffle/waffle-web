@@ -8,6 +8,5 @@ export default class ArsenalPresetsRepository {
         return this.axiosClient
             .get<definitions["arsenal_presets"][]>("/arsenal-presets")
             .then(({ data }) => data)
-            .catch(() => null)
     }
 }

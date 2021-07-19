@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import ArsenalPresetsRepository from "@/repositories/arsenal-presets"
+import ArsenalPresetsRepository from "src/repositories/arsenal-presets"
 
 export const axiosInstance = axios.create({ baseURL: process.env.BASE_API_URL })
 export const axiosFetcher = (url: string) => {

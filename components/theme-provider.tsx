@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core"
 import { useStore } from "nanostores/react"
 import { scrollbarStyles } from "@/components/scrollbar"
-import { palette, changePaletteMode } from "modules/nanostore/palette"
+import { palette, changePaletteMode } from "@/nanostore/palette"
 
 export const drawerWidth: number = 240
 

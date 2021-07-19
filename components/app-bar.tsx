@@ -7,6 +7,7 @@ import MuiButton from "@material-ui/core/Button"
 import MuiTypography from "@material-ui/core/Typography"
 import { useSession } from "next-auth/client"
 import { drawerWidth } from "@/components/theme-provider"
+import { useTranslation } from "react-i18next"
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean
@@ -32,6 +33,7 @@ export const AppBar = styled(MuiAppBar, {
 }))
 
 export const AppBarWithSession: React.FC = () => {
+    const { t } = useTranslation()
     const [session, loading] = useSession()
 
     return (
@@ -42,9 +44,9 @@ export const AppBarWithSession: React.FC = () => {
                     component="div"
                     sx={{ flexGrow: 1 }}
                 >
-                    News
+                    {t("title")}
                 </MuiTypography>
-                <MuiButton color="inherit">Login</MuiButton>
+                <MuiButton color="secondary">{t("signin.discord")}</MuiButton>
             </MuiToolbar>
         </AppBar>
     )

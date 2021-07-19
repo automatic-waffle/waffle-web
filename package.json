@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
+        "dev": "next dev --hostname 127.0.0.1",
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
@@ -20,6 +20,8 @@
         "@supabase/supabase-js": "^1.18.1",
         "axios": "^0.21.1",
         "i18next": "^20.3.3",
+        "nanodelay": "^2.0.0",
+        "nanoevents": "^6.0.0",
         "nanostores": "^0.3.3",
         "next": "^11.0.1",
         "next-auth": "^3.27.3",
@@ -35,6 +37,8 @@
         "eslint": "7.30.0",
         "eslint-config-next": "11.0.1",
         "eslint-config-prettier": "^8.3.0",
+        "next-compose-plugins": "^2.2.1",
+        "next-transpile-modules": "^8.0.0",
         "typescript": "4.3.5"
     }
 }
