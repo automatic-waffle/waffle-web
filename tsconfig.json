@@ -16,12 +16,7 @@
         "types": ["node"],
         "baseUrl": ".",
         "paths": {
-            "@/translations/*": ["src/translations/*"],
-            "@/repositories/*": ["src/repositories/*"],
-            "@/components/*": ["src/components/*"],
-            "@/nanostore/*": ["src/nanostore/*"],
-            "@/utils/*": ["src/utils/*"],
-            "@/types/*": ["src/types/*"]
+            "@/*": ["src/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

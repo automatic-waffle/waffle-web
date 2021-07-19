@@ -1,7 +1,7 @@
 import { Box as MuiBox } from "@material-ui/core"
 import { styled } from "@material-ui/core/styles"
 
-import { overrideExistingStyle } from "@/utils/overrideExistingStyle"
+import { overrideExistingStyle } from "@/override-existing-style"
 
 export const BoxWithAppbarHeight = styled(MuiBox)(({ theme }) => ({
     backgroundColor:

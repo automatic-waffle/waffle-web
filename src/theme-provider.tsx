@@ -6,8 +6,8 @@ import {
     useMediaQuery,
 } from "@material-ui/core"
 import { useStore } from "nanostores/react"
-import { scrollbarStyles } from "@/components/scrollbar"
-import { palette, changePaletteMode } from "@/nanostore/palette"
+import { scrollbarStyles } from "@/scrollbar"
+import { palette, changePaletteMode } from "@/palette"
 
 export const drawerWidth: number = 240
 

@@ -1,7 +1,7 @@
 import useSWR from "swr"
 
-import { axiosFetcher } from "@/repositories/index"
-import { definitions } from "@/types/supabase"
+import { axiosFetcher } from "@/repositories"
+import { definitions } from "@/supabase"
 
 export function useArsenalPresets({
     initialData,

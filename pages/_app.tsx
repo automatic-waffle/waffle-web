@@ -9,7 +9,7 @@ import { badge, badgeEn, ClientMeta, CrossTabClient, log } from "@logux/client"
 import { badgeStyles } from "@logux/client/badge/styles"
 import { useTranslation } from "react-i18next"
 
-import { CustomThemeProvider } from "@/components/theme-provider"
+import { CustomThemeProvider } from "@/theme-provider"
 import Page403 from "./403"
 import Page404 from "./404"
 import "@/translations/i18n"

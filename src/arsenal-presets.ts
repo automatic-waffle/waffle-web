@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios"
-import { definitions } from "@/types/supabase"
+import { definitions } from "@/supabase"
 
 export default class ArsenalPresetsRepository {
     constructor(private axiosClient: AxiosInstance) {}
