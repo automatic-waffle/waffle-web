@@ -1,4 +1,5 @@
 import { AxiosInstance } from "axios"
+
 import { definitions } from "@/supabase"
 
 export default class ArsenalPresetsRepository {

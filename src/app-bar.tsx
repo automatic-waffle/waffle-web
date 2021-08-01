@@ -1,3 +1,6 @@
+import { useSession } from "next-auth/client"
+import { useTranslation } from "react-i18next"
+
 import { styled } from "@material-ui/core/styles"
 import MuiAppBar, {
     AppBarProps as MuiAppBarProps,
@@ -5,9 +8,8 @@ import MuiAppBar, {
 import MuiToolbar from "@material-ui/core/Toolbar"
 import MuiButton from "@material-ui/core/Button"
 import MuiTypography from "@material-ui/core/Typography"
-import { useSession } from "next-auth/client"
+
 import { drawerWidth } from "@/theme-provider"
-import { useTranslation } from "react-i18next"
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean

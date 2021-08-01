@@ -1,7 +1,7 @@
-import { styled } from "@material-ui/core/styles"
-import { overrideExistingStyle } from "@/override-existing-style"
-
 import NextLink from "next/link"
+import { useTranslation } from "react-i18next"
+
+import { styled } from "@material-ui/core/styles"
 import MuiCard from "@material-ui/core/Card"
 import MuiCardHeader from "@material-ui/core/CardHeader"
 import MuiCardContent from "@material-ui/core/CardContent"
@@ -15,7 +15,7 @@ import MuiBox from "@material-ui/core/Box"
 
 import { definitions } from "@/supabase"
 import { useArsenalPresets } from "@/use-arsenal-presets"
-import { useTranslation } from "react-i18next"
+import { overrideExistingStyle } from "@/override-existing-style"
 
 export const CardWithAppbarHeight = styled(MuiCard)(({ theme }) => ({
     ...overrideExistingStyle(

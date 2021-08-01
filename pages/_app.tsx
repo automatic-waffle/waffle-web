@@ -1,18 +1,20 @@
+import "@/translations/i18n"
+
 import Head from "next/head"
 import { useEffect, useState } from "react"
 import type { AppProps } from "next/app"
+import { useTranslation } from "react-i18next"
 import { Provider } from "next-auth/client"
 import { Log, LogStore } from "@logux/core"
 import { ClientContext, ChannelErrors } from "@logux/client/react"
-import CssBaseline from "@material-ui/core/CssBaseline"
 import { badge, badgeEn, ClientMeta, CrossTabClient, log } from "@logux/client"
 import { badgeStyles } from "@logux/client/badge/styles"
-import { useTranslation } from "react-i18next"
 
-import { CustomThemeProvider } from "@/theme-provider"
 import Page403 from "./403"
 import Page404 from "./404"
-import "@/translations/i18n"
+import CssBaseline from "@material-ui/core/CssBaseline"
+
+import { CustomThemeProvider } from "@/theme-provider"
 
 function MyApp({ Component, pageProps }: AppProps) {
     const { t } = useTranslation()

@@ -1,11 +1,13 @@
 import { useMemo, useEffect } from "react"
+import { useStore } from "nanostores/react"
+
 import {
     ThemeProvider,
     createTheme,
     PaletteMode,
     useMediaQuery,
 } from "@material-ui/core"
-import { useStore } from "nanostores/react"
+
 import { scrollbarStyles } from "@/scrollbar"
 import { palette, changePaletteMode } from "@/palette"
 
